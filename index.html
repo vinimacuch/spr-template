@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+
+		<!-- fonts from Google fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:400|Noto+Serif:700" rel="stylesheet">
+
+		<!-- css -->
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<!-- js dependencies -->
+		<script src="node_modules/mustache/mustache.min.js"></script>
+		<script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+		<!-- config -->
+		<script src="config.js"></script>
+
+		<!-- local js files -->
+		<script src="scripts/main.js"></script>
+		<script src="scripts/views.js"></script>
+	</head>
+
+	<body>
+		<noscript>This task requires JavaScript. Please enable JavaScript in your browser and reload the page. For more information on how to do that, please refer to 
+			<a href='https://enable-javascript.com' target='_blank'>enable-javascript.com</a>
+		</noscript>
+
+		<!-- views are inserted in main -->
+		<main id='main'>
+			Loading...
+		</main>
+
+		<!-- Mustache templates below. Each template is a view with a separate HTML structure. -->
+
+		<!-- Introduction view -->
+		<script id="intro-view" type="x-tmpl-mustache">
+		<div class='view'>
+			<h2 class="title">{{ title }}</h2>
+			<p class="text">{{ text }}</p>
+			<button id="btn-next" class="btn next-view">{{ button }}</button>
+		</div>
+		</script>
+
+		<!-- Instructions view -->
+		<script id="instructions-view" type="x-tmpl-mustache">
+		<div class="view">
+			<h2>{{ title }}</h2>
+			<p class="text">{{ text }}</p>
+			<button id="btn-next" class="btn next-view">{{ button }}</button>
+		</view>
+		</script>
+
+		<!-- Practice trial view -->
+		<script id="practice-view" type="x-tmpl-mustache">
+		<div class="view">
+			<h2>{{ title }}</h2>
+			<p class="text">{{ text }}</p>
+			<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
+			<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
+		</view>
+		</script>
+	</body>
+</html>
