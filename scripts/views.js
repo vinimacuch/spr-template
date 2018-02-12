@@ -44,8 +44,39 @@ var initPracticeView = function() {
 		buttonText: config.practice.buttonText
 	}));
 
+	showNextView();
+
 	return view;
 };
+
+// creates Trial View
+var initTrialView = function(trialInfo, CT) {
+	var view = {};
+	view.name = 'trial';
+	view.template = $('#trial-view').html();
+	$('#main').html(Mustache.render(view.template, {
+		currentTrial: CT + 1,
+		totalTrials: data.trials.length,
+		buttonBetween: config.practice.buttonBetween,
+		buttonText: config.practice.buttonText
+	}));
+
+	showNextView();
+
+	return view;
+};
+
+// creates Subject Info View
+var initSubjInfo = function() {
+	var view = {};
+	view.name = 'trial';
+	view.template = $('#subj-info-view').html();
+	$('#main').html(Mustache.render(view.template, {}));
+
+	showNextView();
+
+	return view;
+}
 
 
 // HELPERS:

@@ -10,13 +10,14 @@
 		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 
 		<!-- js dependencies -->
-		<script src="node_modules/mustache/mustache.min.js"></script>
-		<script src="node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="libraries/mustache/mustache.min.js"></script>
+		<script src="libraries/jquery/dist/jquery.min.js"></script>
 
 		<!-- config -->
 		<script src="config.js"></script>
 
 		<!-- local js files -->
+		<script src="scripts/exp.js"></script>
 		<script src="scripts/main.js"></script>
 		<script src="scripts/views.js"></script>
 	</head>
@@ -59,6 +60,17 @@
 			<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
 			<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
 		</view>
+		</script>
+
+		<!-- Trial view (actual experiment) -->
+		<script id="trial-view" type="x-tmpl-mustache">
+		<div class="view">
+			<div class="progress-bar-container">
+				<p><span id="current-trial">{{ currentTrial }}</span>/<span id="total-trial">{{ totalTrials }}</span></p>
+			</div>
+		</div>	
+		<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
+		<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
 		</script>
 	</body>
 </html>
