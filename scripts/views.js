@@ -53,7 +53,9 @@ var initTrialView = function(trialInfo, CT) {
 	var view = {};
 	view.name = 'trial';
 	view.template = $('#trial-view').html();
+	var readingDates = [];
 	var readingTimes = [];
+	var rtCount = trialInfo.sentence.split(" ").length;
 	var sentence = initSentence();
 	$('#main').html(Mustache.render(view.template, {
 		currentTrial: CT + 1,
@@ -62,26 +64,58 @@ var initTrialView = function(trialInfo, CT) {
 		buttonText: config.practice.buttonText
 	}));
 
-	setTimeout(function() {
-		$('.img').addClass('nodisplay');
-
-		// attaches an event listener for key pressed
-		// called handleKeyUp() when a key is pressed. (handleKeyUp() checks whether the key is space)
-		$('body').on('keyup', handleKeyUp);
-	}, 1000);
-
 	// checks whether the key pressed is space and if so calls sentence.showNextWord()
 	// handleKeyUp() is called when a key is pressed
 	var handleKeyUp = function(e) {
 		if (e.which === 32) {
 			sentence.showNextWord();
+
+			// collects the dates (unix time) in a variable readingDates every time a word is shown
+			if (rtCount >= 0) {
+				readingDates.push(Date.now());
+			}
+			rtCount--;
 		}
 	};
 
+	// converts the readingDates into readingTimes by substracting
+	// returns a list of readingTimes
+	var getDeltas = function() {
+		var deltas = [];
 
+		for (var i = 0; i < readingDates.length - 1; i++) {
+			deltas[i] = readingDates[i+1] - readingDates[i];
+		};
+
+		return deltas;
+	};
+
+	// checks the expSettings in config.js and depending on the settings
+	// either show the image for a particular amount of time
+	if (config.expSettings.hideImage === true) {
+		setTimeout(function() {
+			// add a css class to the image to hide it
+			$('.img').addClass('nodisplay');
+
+			// attaches an event listener for key pressed
+			// called handleKeyUp() when a key is pressed. (handleKeyUp() checks whether the key is space)
+			$('body').on('keyup', handleKeyUp);
+		}, config.expSettings.showDuration);
+	// or the image does not disappear at all
+	} else {
+		// attaches an event listener for key pressed
+		// called handleKeyUp() when a key is pressed. (handleKeyUp() checks whether the key is space)
+		$('body').on('keyup', handleKeyUp);
+	}
+
+	// attaches an event listener to the yes / no radio inputs
+	// when an input is selected a response property with a value equal to the answer is added to the trial object
+	// as well as a readingTimes property with value - a list containing the reading times of each word
 	$('input[name=question]').on('change', function() {
 		$('body').off('keyup', handleKeyUp);
 		data.trials[CT].response = $('input[name=question]:checked').val();
+		data.trials[CT].readingTimes = getDeltas();
+		console.log(data.trials[CT]);
 		setTimeout(function() {
 			spr.findNextView();
 		}, 200);
@@ -89,6 +123,7 @@ var initTrialView = function(trialInfo, CT) {
 
 	return view;
 };
+
 
 // creates Subject Info View
 var initSubjInfo = function() {

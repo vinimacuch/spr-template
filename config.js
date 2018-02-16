@@ -5,6 +5,15 @@ var config = {
 	"experimentAuthor": "Stela Plamenova",
 	"experimentID": "spr-001",
 
+	// experiment setting
+	"expSettings": {
+		// if you want the image in the experiment to disappear set to true
+		"hideImage": true,
+		// for how long the image is shown before it dissapears in ms (1000 ms = 1 sec)
+		// needed if "hideImage" is set to true
+		"showDuration": 1000
+	},
+
 	// intro view
 	"intro": {
 		// introduction title
