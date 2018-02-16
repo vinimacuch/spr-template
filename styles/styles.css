@@ -1,3 +1,137 @@
+/*  colors
+    ------
+
+	dark #1A1D24
+	lightgreen: #AEC6B0
+	green #94B192
+
+*/
+
+/*
+	styles that apply to all views
+*/
+h1, h2 {
+	color: #535AAC;
+	font-family: "Noto Serif", sans-serif;
+	font-weight: 700;
+	font-size: 2em;
+	text-align: center;
+}
+
+a, p, li, span, button {
+	font-family: "Noto Sans", sans-serif;
+}
+
+.view {
+	margin: 30px auto;
+	max-width: 960px;
+}
+
+.next-view {
+	border: 3px solid #535AAC;
+	background-color: white;
+	display: block;
+	color: #535AAC;
+	font-weight: bold;
+	outline: none;
+	margin: 30px auto;
+	padding: 8px 16px;
+	text-transform: uppercase;
+	transition: all 0.125s ease;
+}
+
+.next-view:hover,
+.next-view:focus {
+	background-color: #535AAC;
+	color: white;
+}
+
+.text-container {
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.text {
+	font-size: 1em;
+}
+
+
+/*
+	practice trial and trial related styles
+*/
+
+.stimulus-container {
+	height: 380px;
+	margin: 0 auto;
+	width: 500px;
+}
+
+.img {
+	background: #555;
+	height: 100%;
+	width: 100%;
+}
+
+.sentence-container {
+	box-sizing: boder-box;
+	display: inline-block;
+	margin: 0 auto;
+	padding: 30px 0;
+	width: auto;
+}
+
+.sentence,
+.question {
+	padding: 20px 0;
+	text-align: center;
+}
+
+.word {
+	font-size: 1.3rem; 
+	margin: 0 3px;
+	position: relative;
+	visibility: hidden;
+}
+
+.word:after {
+	height: 2px;
+	width: 100%;
+	background: #535AAC;
+	display: inline-block;
+	content: "";
+	visibility: visible;
+
+	position: absolute;
+	bottom: -3px;
+	left: 0;
+}
+
+input[name=question] {
+	display: none;
+}
+
+.answer {
+	border: 2px solid #535AAC;
+	border-radius: 3px;
+	color: #535AAC;
+	font-weight: bold;
+	margin: 10px;
+	padding: 3px 6px;
+}
+
+.answer:hover,
+.answer:focus {
+	background: #535AAC;
+	color: white;
+}
+
+/*
+	classes used by the js
+*/
 .nodisplay {
 	display: none;
+}
+
+.visible {
+	visibility: visible;
 }

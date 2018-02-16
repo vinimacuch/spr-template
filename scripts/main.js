@@ -27,12 +27,13 @@ spr.findNextView = function() {
 };
 
 spr.init = function() {
-	this.view = initIntroView();
 	// CPT - current practice trial
 	this.CPT = 0;
 	// CT - current trial
 	this.CT = 0;
 
+	this.view = initTrialView(data.trials[this.CT], this.CT);
+	
 	// to be done: get TT and TPT from the model, this now is a temp solution
 	// TPT - total practice trials
 	this.TPT = 4;

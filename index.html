@@ -2,9 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
+		<title>ExPrag experiments</title>
 
 		<!-- fonts from Google fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Lato:400|Noto+Serif:700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700|Source+Sans+Pro:400,700|Lato:700" rel="stylesheet">
 
 		<!-- css -->
 		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
@@ -40,8 +41,10 @@
 		<script id="intro-view" type="x-tmpl-mustache">
 		<div class='view'>
 			<h2 class="title">{{ title }}</h2>
-			<p class="text">{{ text }}</p>
-			<button id="btn-next" class="btn next-view">{{ button }}</button>
+			<section class="text-container">
+				<p class="text">{{ text }}</p>
+			</section>
+			<button class="btn next-view">{{ button }}</button>
 		</div>
 		</script>
 
@@ -49,8 +52,10 @@
 		<script id="instructions-view" type="x-tmpl-mustache">
 		<div class="view">
 			<h2>{{ title }}</h2>
-			<p class="text">{{ text }}</p>
-			<button id="btn-next" class="btn next-view">{{ button }}</button>
+			<section class="text-container">
+				<p class="text">{{ text }}</p>
+			</section>
+			<button class="btn next-view">{{ button }}</button>
 		</view>
 		</script>
 
@@ -58,9 +63,10 @@
 		<script id="practice-view" type="x-tmpl-mustache">
 		<div class="view">
 			<h2>{{ title }}</h2>
-			<p class="text">{{ text }}</p>
-			<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
-			<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
+			<section class="text-container">
+				<p class="text">{{ text }}</p>
+			</section>
+			<button class="btn next-view">{{ buttonText }}</button>
 		</view>
 		</script>
 
@@ -68,11 +74,32 @@
 		<script id="trial-view" type="x-tmpl-mustache">
 		<div class="view">
 			<div class="progress-bar-container">
-				<p><span id="current-trial">{{ currentTrial }}</span>/<span id="total-trial">{{ totalTrials }}</span></p>
+				<p>progress: <span id="current-trial">{{ currentTrial }}</span>/<span id="total-trial">{{ totalTrials }}</span></p>
 			</div>
+			<div class="stimulus-container">
+				<div class="stimulus img"></div>
+			</div>
+			<p class="sentence">
+				{{# sentence }}
+				<span class="word">{{ . }}</span>
+				{{/ sentence }}
+			</p>
+			<p class="question nodisplay">
+				<label for="yes" class="answer">yes</label>
+				<input type="radio" name="question" id="yes"
+					value="yes" />
+				<input type="radio" name="question" id="no" value="no" />
+				<label for="no" class="answer">no</label>
+			</p>
 		</div>	
-		<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
-		<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
+		</script>
+
+		<script id="thanks-view" type="x-tmpl-mustache">
+		<div class="view">
+			<h2>{{ thanksMessage }}</h2>
+			<form>
+			</form>
+		</div>
 		</script>
 	</body>
 </html>

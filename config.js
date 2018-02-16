@@ -3,11 +3,12 @@
 var config = {
 	// mandatory field
 	"experimentAuthor": "Stela Plamenova",
+	"experimentID": "spr-001",
 
 	// intro view
 	"intro": {
 		// introduction title
-		"title": "SPR",
+		"title": "Welcome to ExPrag experiments!",
 		// introduction text
 		"text": "Lorem ipsum dolor sit amet consectetur adipiscing elit tellus auctor, risus metus mauris nibh leo senectus varius taciti bibendum, laoreet tempor orci ligula iaculis odio malesuada nostra. Erat gravida consequat nunc pharetra libero tempus lobortis placerat, laoreet vitae eget vivamus eros luctus sed nullam auctor, vel sem hac quam facilisis aptent blandit. Bibendum molestie morbi ullamcorper vitae accumsan dapibus ultricies aliquet mi luctus, ante suscipit purus consequat nascetur a senectus cras donec.",
 		// instroduction's slide proceeding button
@@ -29,16 +30,17 @@ var config = {
 		"title": "Practice",
 		"text": "This is a practice trial",
 		// button text between trials
-		"buttonBetween": "Next",
-		// button text to move to the real experiment
-		"buttonText": "Begin Experiment"
+		"buttonText": "Next",
 	},
 
 	// trial view
 	"trial": {
 		// button text between trials
-		"buttonBetween": "Next",
-		// button text to move to the real experiment
-		"buttonText": "Finish Experiment"
+		"buttonText": "Next",
+	},
+
+	// thanks view
+	"thanks": {
+		"message": "Thank you for taking part in this experiment!"
 	}
 }

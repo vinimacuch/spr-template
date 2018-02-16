@@ -7,17 +7,18 @@ var data = {};
 // what the trial object contains depends on the particular experiment.
 //
 data.trials = [
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{}
+	{"sentence": "Most of the balls are black in the pictute"},
+	{"sentence": "Most of the balls are white in the pictute"},
+	{"sentence": "Some of the balls are white in the pictute"},
+	{"sentence": "Some of the balls are white in the pictute"},
+	{"sentence": "Some of the balls are white in the pictute"},
+	{"sentence": "All of the balls are black in the pictute"},
+	{"sentence": "All of the balls are black in the pictute"},
+	{"sentence": "None of the balls are black in the pictute"},
+	{"sentence": "None of the balls are black in the pictute"},
+	{"sentence": "None of the balls are black in the pictute"}
 ];
 
 data.author = config.experimentAuthor;
-data.experimentID = "";
+data.experimentID = config.experimentID;
+data.author = config.experimentAuthor;
