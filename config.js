@@ -1,11 +1,15 @@
 // the config provides the option of customising texts and titles across the website.
-
 var config = {
 	// mandatory field
-	"experimentAuthor": "Stela Plamenova",
-	"experimentID": "spr-001",
-
-	// experiment setting
+	"author": "Stela Plamenova",
+	"id": "spr-001",
+	"description": "Self-paced reading",
+	"contact_email": "",
+	"is_MTurk": true,
+	"MTurk_server": "",
+/*	"uni_server": "https://procomprag.herokuapp.com/api/submit_experiment",*/
+	"uni_server": "",
+	// experiment settings
 	"expSettings": {
 		// if you want the image in the experiment to disappear set to true
 		"hideImage": true,
@@ -42,10 +46,22 @@ var config = {
 		"buttonText": "Next",
 	},
 
+	// begin experiment view
+	"beginExp": {
+		"text": ""
+	},
+
 	// trial view
 	"trial": {
 		// button text between trials
 		"buttonText": "Next",
+	},
+
+	// subject info view
+	"subjInfo": {
+		"title": "Additional Info",
+		"text": "Answering the following questions is optional, but will help us understand your answers.",
+		"buttonText": "Continue",
 	},
 
 	// thanks view

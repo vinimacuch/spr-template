@@ -8,7 +8,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700|Source+Sans+Pro:400,700|Lato:700" rel="stylesheet">
 
 		<!-- css -->
-		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 
 		<!-- js dependencies -->
 		<script src="libraries/mustache/mustache.min.js"></script>
@@ -67,7 +67,15 @@
 				<p class="text">{{ text }}</p>
 			</section>
 			<button class="btn next-view">{{ buttonText }}</button>
-		</view>
+		</div>
+		</script>
+
+		<!-- Begin Experiment view -->
+		<script id="begin-exp-view" type="x-tmpl-mustache">
+		<div class="view">
+			<p>{{ text }}</p>
+			<button class="btn next-view">Begin Experiment</button>
+		</div>
 		</script>
 
 		<!-- Trial view (actual experiment) -->
@@ -76,10 +84,13 @@
 			<div class="progress-bar-container">
 				<p>progress: <span id="current-trial">{{ currentTrial }}</span>/<span id="total-trial">{{ totalTrials }}</span></p>
 			</div>
-			<div class="stimulus-container">
-				<div class="stimulus img"></div>
+			<div class="fixation-container">
+				<div class="fixation-point"></div>
 			</div>
-			<p class="sentence">
+			<div class="stimulus-container">
+				<div class="stimulus img nodisplay show"></div>
+			</div>
+			<p class="sentence nodisplay show">
 				{{# sentence }}
 				<span class="word">{{ . }}</span>
 				{{/ sentence }}
@@ -94,11 +105,52 @@
 		</div>	
 		</script>
 
+		<!-- subject info view -->
+		<script id="subj-info-view" type="x-tmpl-mustache">
+		<div class="view subj-info-templ">
+			<h2>{{ title }}</h2>
+			<p class="text">{{ text }}</p>
+			<form>
+				<p>
+					<label for="age">Age:</label>
+					<input type="number" name="age" min="18" max="110" id="age" />
+				</p>
+				<p>
+					<label for="gender">Gender:</label>
+					<select id="gender" name="gender">
+						<option></option>
+						<option value="male">male</option>
+						<option value="female">female</option>
+						<option value="other">other</option>
+					</select>
+				</p>
+				<p>
+					<label for="education">Level of Education:</label>
+					<select id="education" name="education">
+						<option></option>
+						<option value="ghs">Graduated High School</option>
+						<option value="gc">Graduated College</option>
+						<option value="hd">Higher Degree</option>
+					</select>
+				</p>
+				<p>
+					<label for="languages" name="languages">Native Languages: <br /><span>(i.e. the language(s) spoken at home when you were a child)</</span></label>
+					<input type="text" id="languages"/>
+				</p>
+				<p class="comment-sect">
+					<label for="comments">Further comments</label>
+					<textarea name="comments" id="comments"
+					rows="6" cols="40"></textarea>
+				</p>
+				<button id="sends-data" class="btn next-view sends-data">{{ buttonText }}</button>
+			</form>
+		</div>
+		</script>
+
+		<!-- thanks view -->
 		<script id="thanks-view" type="x-tmpl-mustache">
 		<div class="view">
 			<h2>{{ thanksMessage }}</h2>
-			<form>
-			</form>
 		</div>
 		</script>
 	</body>
