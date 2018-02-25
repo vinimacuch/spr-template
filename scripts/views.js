@@ -75,7 +75,7 @@ var initTrialView = function(trialInfo, CT) {
 
 	$('#main').html(Mustache.render(view.template, {
 		currentTrial: CT + 1,
-		totalTrials: data.trials.length,
+		totalTrials: spr.data.trials.length,
 		sentence: trialInfo.sentence.split(" "),
 		buttonText: config.practice.buttonText
 	}));
@@ -139,10 +139,10 @@ var initTrialView = function(trialInfo, CT) {
 	// as well as a readingTimes property with value - a list containing the reading times of each word
 	$('input[name=question]').on('change', function() {
 		$('body').off('keyup', handleKeyUp);
-		data.trials[CT].timeSpent = Date.now() - startingTime - 1000;
-		data.trials[CT].response = $('input[name=question]:checked').val();
-		data.trials[CT].readingTimes = getDeltas();
-		console.log(data.trials[CT]);
+		spr.data.trials[CT].timeSpent = Date.now() - startingTime - 1000;
+		spr.data.trials[CT].response = $('input[name=question]:checked').val();
+		spr.data.trials[CT].readingTimes = getDeltas();
+		console.log(spr.data.trials[CT]);
 		setTimeout(function() {
 			spr.findNextView();
 		}, 200);
@@ -178,7 +178,9 @@ var initThanksView = function(sendData) {
 		thanksMessage: config.thanks.message
 	}));
 
-	submitResults(config.is_MTurk, config.contact_email);
+	/*submitResults(config.is_MTurk, config.contact_email);*/
+
+	console.log(spr.data.trials);
 
 	return view;
 };
@@ -196,13 +198,13 @@ var showNextView = function() {
 	for (var i=0; i<nexts.length; i++){
 		if (nexts[i].id === 'sends-data') {
 			nexts[i].addEventListener('click', function() {
-				data.subjInfo = {
-					age: $('#age').val(),
-					gender: $('#gender').val(),
-					education: $('#education').val(),
-					languages: $('#languages').val(),
-					comments: $('#comments').val()
-				};
+				for (var i=0; i<spr.data.trials.length; i++) {
+					spr.data.trials[i].age = $('#age').val(),
+					spr.data.trials[i].gender = $('#gender').val(),
+					spr.data.trials[i].education = $('#education').val(),
+					spr.data.trials[i].languages = $('#languages').val(),
+					spr.data.trials[i].comments = $('#comments').val().trim()
+				}
 
 				spr.findNextView();
 			});
@@ -254,8 +256,6 @@ var submitResults = function(isMTurk, contactEmail) {
 	isMTurk = typeof isMTurk !== 'undefined' ? isMTurk : false;
 	// set a default contact email
 	contactEmail = typeof contactEmail !== 'undefined' ? contactEmail : "mchfranke@gmail.com";
-	console.log(contactEmail);
-	console.log(isMTurk);
 
 	$.ajax({
 		type: 'POST',
@@ -264,9 +264,8 @@ var submitResults = function(isMTurk, contactEmail) {
 		data: {
 			'author': config.author,
 			'experiment_id': config.experiment_id,
-			'trials': data.trials,
-			'description': config.description,
-			'subject_info': data.subjInfo
+			'trials': spr.data.trials,
+			'description': config.description
 		},
 		success: function (responseData, textStatus, jqXHR) {
 			console.log(textStatus)
@@ -311,9 +310,8 @@ var submitToMTurk = function() {
 			'assignmentID': '',
 			'author': config.author,
 			'experiment_id': config.experiment_id,
-			'trials': data.trials,
-			'description': config.description,
-			'subject_info': data.subjInfo
+			'trials': spr.data.trials,
+			'description': config.description
 		},
 		success: function() {
 			console.log('submission successful');

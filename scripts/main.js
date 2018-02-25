@@ -18,10 +18,10 @@ spr.findNextView = function() {
 	} else if (this.view.name === 'practice' && this.CPT === this.TPT) {
 		this.view = initBeginExpView();
 	} else if (this.view.name === 'beginExp') {
-		this.view = initTrialView(data.trials[this.CT], this.CT);
+		this.view = initTrialView(this.data.trials[this.CT], this.CT);
 		this.CT++;
 	} else if (this.view.name === 'trial' && this.CT < this.TT) {
-		this.view = initTrialView(data.trials[this.CT], this.CT);
+		this.view = initTrialView(this.data.trials[this.CT], this.CT);
 		this.CT++;
 	} else if (this.view.name === 'trial' && this.CT === this.TT) {
 		this.view = initSubjInfoView();
@@ -36,11 +36,13 @@ spr.init = function() {
 	// CT - current trial
 	this.CT = 0;
 
+	this.data = initExp();
+
 	this.view = initIntroView();
 	
 	// to be done: get TT and TPT from the model, this now is a temp solution
 	// TPT - total practice trials
 	this.TPT = 2;
 	// TT - total trials
-	this.TT = data.trials.length;
+	this.TT = this.data.trials.length;
 };
