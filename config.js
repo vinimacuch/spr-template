@@ -2,13 +2,11 @@
 var config = {
 	// mandatory field
 	"author": "Stela Plamenova",
-	"id": "spr-001",
+	"experiment_id": "test-spr-001",
 	"description": "Self-paced reading",
-	"contact_email": "",
-	"is_MTurk": true,
+	"contact_email": "stella.plamenova@gmail.com",
+	"is_MTurk": false,
 	"MTurk_server": "",
-/*	"uni_server": "https://procomprag.herokuapp.com/api/submit_experiment",*/
-	"uni_server": "",
 	// experiment settings
 	"expSettings": {
 		// if you want the image in the experiment to disappear set to true

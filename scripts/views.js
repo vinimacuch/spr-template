@@ -259,7 +259,8 @@ var submitResults = function(isMTurk, contactEmail) {
 
 	$.ajax({
 		type: 'POST',
-		url: config.uni_server,
+		url: 'https://procomprag.herokuapp.com/api/submit_experiment',
+		crossDomain: true,
 		data: {
 			'author': config.author,
 			'experiment_id': config.experiment_id,
