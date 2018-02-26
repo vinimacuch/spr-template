@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
+		<title>XPrag experiments</title>
 
 		<!-- fonts from Google fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Lato:400|Noto+Serif:700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700|Source+Sans+Pro:400,700|Lato:700" rel="stylesheet">
 
 		<!-- css -->
-		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 
 		<!-- js dependencies -->
 		<script src="libraries/mustache/mustache.min.js"></script>
@@ -20,8 +21,6 @@
 		<script src="scripts/exp.js"></script>
 		<script src="scripts/main.js"></script>
 		<script src="scripts/views.js"></script>
-		<script src="scripts/submit_to_server.js"></script>
-		<script src="scripts/mmturkey.js"></script>
 	</head>
 
 	<body>
@@ -40,8 +39,10 @@
 		<script id="intro-view" type="x-tmpl-mustache">
 		<div class='view'>
 			<h2 class="title">{{ title }}</h2>
-			<p class="text">{{ text }}</p>
-			<button id="btn-next" class="btn next-view">{{ button }}</button>
+			<section class="text-container">
+				<p class="text">{{ text }}</p>
+			</section>
+			<button class="btn next-view">{{ button }}</button>
 		</div>
 		</script>
 
@@ -49,8 +50,10 @@
 		<script id="instructions-view" type="x-tmpl-mustache">
 		<div class="view">
 			<h2>{{ title }}</h2>
-			<p class="text">{{ text }}</p>
-			<button id="btn-next" class="btn next-view">{{ button }}</button>
+			<section class="text-container">
+				<p class="text">{{ text }}</p>
+			</section>
+			<button class="btn next-view">{{ button }}</button>
 		</view>
 		</script>
 
@@ -58,21 +61,95 @@
 		<script id="practice-view" type="x-tmpl-mustache">
 		<div class="view">
 			<h2>{{ title }}</h2>
-			<p class="text">{{ text }}</p>
-			<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
-			<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
-		</view>
+			<section class="text-container">
+				<p class="text">{{ text }}</p>
+			</section>
+			<button class="btn next-view">{{ buttonText }}</button>
+		</div>
+		</script>
+
+		<!-- Begin Experiment view -->
+		<script id="begin-exp-view" type="x-tmpl-mustache">
+		<div class="view">
+			<p>{{ text }}</p>
+			<button class="btn next-view">Begin Experiment</button>
+		</div>
 		</script>
 
 		<!-- Trial view (actual experiment) -->
 		<script id="trial-view" type="x-tmpl-mustache">
 		<div class="view">
 			<div class="progress-bar-container">
-				<p><span id="current-trial">{{ currentTrial }}</span>/<span id="total-trial">{{ totalTrials }}</span></p>
+				<p>progress: <span id="current-trial">{{ currentTrial }}</span>/<span id="total-trial">{{ totalTrials }}</span></p>
 			</div>
+			<div class="fixation-container">
+				<div class="fixation-point"></div>
+			</div>
+			<div class="stimulus-container">
+				<div class="stimulus img nodisplay show"></div>
+			</div>
+			<p class="sentence nodisplay show">
+				{{# sentence }}
+				<span class="word">{{ . }}</span>
+				{{/ sentence }}
+			</p>
+			<p class="question nodisplay">
+				<label for="yes" class="answer">yes</label>
+				<input type="radio" name="question" id="yes"
+					value="yes" />
+				<input type="radio" name="question" id="no" value="no" />
+				<label for="no" class="answer">no</label>
+			</p>
 		</div>	
-		<button id="btn-between" class="btn next-view">{{ buttonBetween }}</button>
-		<button id="btn-next" class="btn next-view nodisplay">{{ buttonText }}</button>
+		</script>
+
+		<!-- subject info view -->
+		<script id="subj-info-view" type="x-tmpl-mustache">
+		<div class="view subj-info-templ">
+			<h2>{{ title }}</h2>
+			<p class="text">{{ text }}</p>
+			<form>
+				<p>
+					<label for="age">Age:</label>
+					<input type="number" name="age" min="18" max="110" id="age" />
+				</p>
+				<p>
+					<label for="gender">Gender:</label>
+					<select id="gender" name="gender">
+						<option></option>
+						<option value="male">male</option>
+						<option value="female">female</option>
+						<option value="other">other</option>
+					</select>
+				</p>
+				<p>
+					<label for="education">Level of Education:</label>
+					<select id="education" name="education">
+						<option></option>
+						<option value="graduated_high_school">Graduated High School</option>
+						<option value="graduated_college">Graduated College</option>
+						<option value="higher_degree">Higher Degree</option>
+					</select>
+				</p>
+				<p>
+					<label for="languages" name="languages">Native Languages: <br /><span>(i.e. the language(s) spoken at home when you were a child)</</span></label>
+					<input type="text" id="languages"/>
+				</p>
+				<p class="comment-sect">
+					<label for="comments">Further comments</label>
+					<textarea name="comments" id="comments"
+					rows="6" cols="40"></textarea>
+				</p>
+				<button id="sends-data" class="btn next-view sends-data">{{ buttonText }}</button>
+			</form>
+		</div>
+		</script>
+
+		<!-- thanks view -->
+		<script id="thanks-view" type="x-tmpl-mustache">
+		<div class="view">
+			<h2>{{ thanksMessage }}</h2>
+		</div>
 		</script>
 	</body>
 </html>
